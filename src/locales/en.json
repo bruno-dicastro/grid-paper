@@ -30,6 +30,7 @@
     "header_main": "Header (Primary)",
     "header_secondary": "Header (Secondary)",
     "footer": "Footer",
+    "footer_default": "Created with gridpaper.dicastro.io",
     "watermark": "Watermark",
     "placeholders": {
       "header_main": "e.g. Name, Institution...",

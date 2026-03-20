@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import type { PaperSettings } from '../types/paper';
 
 interface PatternSVGProps {
@@ -9,6 +10,7 @@ interface PatternSVGProps {
 }
 
 export const PatternSVG: React.FC<PatternSVGProps> = ({ settings, width, height, pageIndex }) => {
+  const { t } = useTranslation();
   const { pattern, spacing, lineColor, lineWidth, margin, showLineNumbers, startNumber, totalLines } = settings;
   
   const contentWidth = width - (margin * 2);
@@ -164,11 +166,18 @@ export const PatternSVG: React.FC<PatternSVGProps> = ({ settings, width, height,
           )}
         </g>
       )}
-      {settings.footer && (
-        <text x={width / 2} y={height - margin / 2} fontSize={margin / 3} fill={lineColor} textAnchor="middle" dominantBaseline="middle" className="select-none">
-          {settings.footer}
-        </text>
-      )}
+      <text 
+        x={width / 2} 
+        y={height - margin / 2} 
+        fontSize={Math.max(3, margin / 4)} 
+        fill={lineColor} 
+        textAnchor="middle" 
+        dominantBaseline="middle" 
+        className="select-none"
+        fillOpacity={settings.footer ? 1 : 0.4}
+      >
+        {settings.footer || t('sidebar.footer_default')}
+      </text>
     </svg>
   );
 };

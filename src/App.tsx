@@ -226,6 +226,16 @@ function App() {
           >
             EN
           </button>
+          <button
+            onClick={() => i18n.changeLanguage('fr')}
+            className={`px-3 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
+              i18n.language.startsWith('fr')
+                ? 'bg-[#8b5e3c] text-white shadow-md'
+                : 'text-stone-500 hover:bg-stone-100'
+            }`}
+          >
+            FR
+          </button>
         </div>
         
         {/* Floating Zoom Control - Bottom Left */}

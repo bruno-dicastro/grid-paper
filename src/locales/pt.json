@@ -30,6 +30,7 @@
     "header_main": "Cabeçalho (Principal)",
     "header_secondary": "Cabeçalho (Secundário)",
     "footer": "Rodapé",
+    "footer_default": "Criado com gridpaper.dicastro.io",
     "watermark": "Marca d'água",
     "placeholders": {
       "header_main": "Ex: Nome, Instituição...",
