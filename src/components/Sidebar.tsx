@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import type { PaperSettings, PatternType } from '../types/paper';
 import { PATTERN_DEFAULTS } from '../types/paper';
 import { Settings, Type, Layout, Grid, Hash, Maximize } from 'lucide-react';
@@ -13,17 +14,19 @@ interface SidebarProps {
 const ICON_COLOR = "#8b5e3c"; // Brown Leather
 
 export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen, onClose }) => {
+  const { t } = useTranslation();
+
   const handleChange = (key: keyof PaperSettings, value: any) => {
     setSettings((prev) => ({ ...prev, [key]: value }));
   };
 
   const patterns: { label: string; value: PatternType }[] = [
-    { label: 'Pautado', value: 'ruled' },
-    { label: 'Quadriculado', value: 'grid' },
-    { label: 'Pontilhado', value: 'dots' },
-    { label: 'Partitura', value: 'staff' },
-    { label: 'Caligrafia', value: 'calligraphy' },
-    { label: 'Triangular', value: 'triangular' },
+    { label: t('sidebar.patterns.ruled'), value: 'ruled' },
+    { label: t('sidebar.patterns.grid'), value: 'grid' },
+    { label: t('sidebar.patterns.dots'), value: 'dots' },
+    { label: t('sidebar.patterns.staff'), value: 'staff' },
+    { label: t('sidebar.patterns.calligraphy'), value: 'calligraphy' },
+    { label: t('sidebar.patterns.triangular'), value: 'triangular' },
   ];
 
   return (
@@ -44,7 +47,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
         <div className="flex items-center justify-between text-[#8b5e3c]">
           <div className="flex items-center gap-2">
             <Grid size={24} color={ICON_COLOR} />
-            <h1 className="text-xl font-bold tracking-tight text-stone-800">Gerador de Folhas</h1>
+            <h1 className="text-xl font-bold tracking-tight text-stone-800">{t('app_title')}</h1>
           </div>
           <button 
             onClick={onClose}
@@ -58,7 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
         {/* Pattern Selection */}
         <section className="space-y-3">
           <label className="flex items-center gap-2 text-sm font-semibold text-stone-700">
-            <Layout size={16} color={ICON_COLOR} /> Padronagem
+            <Layout size={16} color={ICON_COLOR} /> {t('sidebar.pattern')}
           </label>
           <div className="grid grid-cols-2 gap-2">
             {patterns.map((p) => (
@@ -84,11 +87,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
         {/* Page Settings */}
         <section className="space-y-3">
           <label className="flex items-center gap-2 text-sm font-semibold text-stone-700">
-            <Maximize size={16} color={ICON_COLOR} /> Página
+            <Maximize size={16} color={ICON_COLOR} /> {t('sidebar.page')}
           </label>
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1">
-              <label className="text-xs text-stone-500">Tamanho</label>
+              <label className="text-xs text-stone-500">{t('sidebar.size')}</label>
               <select
                 value={settings.pageSize}
                 onChange={(e) => handleChange('pageSize', e.target.value)}
@@ -99,14 +102,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
               </select>
             </div>
             <div className="space-y-1">
-              <label className="text-xs text-stone-500">Orientação</label>
+              <label className="text-xs text-stone-500">{t('sidebar.orientation.label')}</label>
               <select
                 value={settings.orientation}
                 onChange={(e) => handleChange('orientation', e.target.value)}
                 className="w-full p-2 text-xs border border-[#e8e2d7] rounded-md focus:ring-2 focus:ring-[#8b5e3c] outline-none bg-white text-stone-700"
               >
-                <option value="portrait">Retrato</option>
-                <option value="landscape">Paisagem</option>
+                <option value="portrait">{t('sidebar.orientation.portrait')}</option>
+                <option value="landscape">{t('sidebar.orientation.landscape')}</option>
               </select>
             </div>
           </div>
@@ -115,12 +118,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
         {/* Dimensions */}
         <section className="space-y-4">
           <label className="flex items-center gap-2 text-sm font-semibold text-stone-700">
-            <Settings size={16} color={ICON_COLOR} /> Parâmetros
+            <Settings size={16} color={ICON_COLOR} /> {t('sidebar.parameters')}
           </label>
 
           <div className="space-y-2">
             <div className="flex justify-between text-xs text-stone-500">
-              <span>Espaçamento: {settings.spacing}mm</span>
+              <span>{t('sidebar.spacing')}: {settings.spacing}mm</span>
             </div>
             <input
               type="range"
@@ -135,7 +138,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
 
           <div className="space-y-2">
             <div className="flex justify-between text-xs text-stone-500">
-              <span>Espessura: {settings.lineWidth}mm</span>
+              <span>{t('sidebar.line_width')}: {settings.lineWidth}mm</span>
             </div>
             <input
               type="range"
@@ -150,7 +153,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
 
           <div className="space-y-2">
             <div className="flex justify-between text-xs text-stone-500">
-              <span>Margem: {settings.margin}mm</span>
+              <span>{t('sidebar.margin')}: {settings.margin}mm</span>
             </div>
             <input
               type="range"
@@ -164,7 +167,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-stone-500">Cor da Linha</label>
+            <label className="text-xs text-stone-500">{t('sidebar.line_color')}</label>
             <input
               type="color"
               value={settings.lineColor}
@@ -178,7 +181,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
         {settings.pattern === 'ruled' && (
           <section className="space-y-4 pt-4 border-t border-[#e8e2d7]">
             <label className="flex items-center gap-2 text-sm font-semibold text-stone-700">
-              <Hash size={16} color={ICON_COLOR} /> Numeração
+              <Hash size={16} color={ICON_COLOR} /> {t('sidebar.numbering')}
             </label>
 
             <label className="flex items-center gap-3 cursor-pointer">
@@ -188,12 +191,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
                 onChange={(e) => handleChange('showLineNumbers', e.target.checked)}
                 className="w-4 h-4 text-[#8b5e3c] rounded border-[#e8e2d7] focus:ring-[#8b5e3c] accent-[#8b5e3c]"
               />
-              <span className="text-sm text-stone-600">Numerar linhas</span>
+              <span className="text-sm text-stone-600">{t('sidebar.show_line_numbers')}</span>
             </label>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-stone-500">Total de linhas</label>
+                <label className="text-xs text-stone-500">{t('sidebar.total_lines')}</label>
                 <input
                   type="number"
                   value={settings.totalLines}
@@ -202,7 +205,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
                 />
               </div>
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-stone-500">Início</label>
+                <label className="text-xs text-stone-500">{t('sidebar.start_number')}</label>
                 <input
                   type="number"
                   value={settings.startNumber}
@@ -217,14 +220,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
         {/* Content */}
         <section className="space-y-4 pt-4 border-t border-[#e8e2d7]">
           <label className="flex items-center gap-2 text-sm font-semibold text-stone-700">
-            <Type size={16} color={ICON_COLOR} /> Conteúdo Extra
+            <Type size={16} color={ICON_COLOR} /> {t('sidebar.extra_content')}
           </label>
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-stone-500">Cabeçalho (Principal)</label>
+            <label className="text-xs text-stone-500">{t('sidebar.header_main')}</label>
             <input
               type="text"
-              placeholder="Ex: Nome, Instituição..."
+              placeholder={t('sidebar.placeholders.header_main')}
               value={settings.header}
               onChange={(e) => handleChange('header', e.target.value)}
               className="w-full p-2 text-sm border border-[#e8e2d7] rounded-md focus:ring-2 focus:ring-[#8b5e3c] focus:border-[#8b5e3c] outline-none transition-all bg-white text-stone-700"
@@ -232,10 +235,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-stone-500">Cabeçalho (Secundário)</label>
+            <label className="text-xs text-stone-500">{t('sidebar.header_secondary')}</label>
             <input
               type="text"
-              placeholder="Ex: Data, Matéria..."
+              placeholder={t('sidebar.placeholders.header_secondary')}
               value={settings.headerSecondary}
               onChange={(e) => handleChange('headerSecondary', e.target.value)}
               className="w-full p-2 text-sm border border-[#e8e2d7] rounded-md focus:ring-2 focus:ring-[#8b5e3c] focus:border-[#8b5e3c] outline-none transition-all bg-white text-stone-700"
@@ -243,10 +246,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-stone-500">Rodapé</label>
+            <label className="text-xs text-stone-500">{t('sidebar.footer')}</label>
             <input
               type="text"
-              placeholder="Ex: Página..."
+              placeholder={t('sidebar.placeholders.footer')}
               value={settings.footer}
               onChange={(e) => handleChange('footer', e.target.value)}
               className="w-full p-2 text-sm border border-[#e8e2d7] rounded-md focus:ring-2 focus:ring-[#8b5e3c] focus:border-[#8b5e3c] outline-none transition-all bg-white text-stone-700"
@@ -254,10 +257,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-stone-500">Marca d'água</label>
+            <label className="text-xs text-stone-500">{t('sidebar.watermark')}</label>
             <input
               type="text"
-              placeholder="Ex: CONFIDENCIAL"
+              placeholder={t('sidebar.placeholders.watermark')}
               value={settings.watermark}
               onChange={(e) => handleChange('watermark', e.target.value)}
               className="w-full p-2 text-sm border border-[#e8e2d7] rounded-md focus:ring-2 focus:ring-[#8b5e3c] focus:border-[#8b5e3c] outline-none transition-all bg-white text-stone-700"

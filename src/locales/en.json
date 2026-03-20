@@ -1,0 +1,54 @@
+{
+  "app_title": "Grid Paper Generator",
+  "sidebar": {
+    "pattern": "Pattern",
+    "patterns": {
+      "ruled": "Ruled",
+      "grid": "Grid",
+      "dots": "Dots",
+      "staff": "Staff",
+      "calligraphy": "Calligraphy",
+      "triangular": "Triangular"
+    },
+    "page": "Page",
+    "size": "Size",
+    "orientation": {
+      "label": "Orientation",
+      "portrait": "Portrait",
+      "landscape": "Landscape"
+    },
+    "parameters": "Parameters",
+    "spacing": "Spacing",
+    "line_width": "Line Width",
+    "margin": "Margin",
+    "line_color": "Line Color",
+    "numbering": "Numbering",
+    "show_line_numbers": "Show line numbers",
+    "total_lines": "Total lines",
+    "start_number": "Start at",
+    "extra_content": "Extra Content",
+    "header_main": "Header (Primary)",
+    "header_secondary": "Header (Secondary)",
+    "footer": "Footer",
+    "watermark": "Watermark",
+    "placeholders": {
+      "header_main": "e.g. Name, Institution...",
+      "header_secondary": "e.g. Date, Subject...",
+      "footer": "e.g. Page...",
+      "watermark": "e.g. CONFIDENTIAL"
+    },
+    "language": "Language"
+  },
+  "zoom": {
+    "label": "Zoom",
+    "auto_fit": "Auto-Fit",
+    "title": "Adjust Zoom"
+  },
+  "export": {
+    "svg": "Export as SVG",
+    "pdf": "Export as PDF",
+    "pdf_exporting": "Exporting...",
+    "print": "Print Pages",
+    "print_btn": "Print"
+  }
+}

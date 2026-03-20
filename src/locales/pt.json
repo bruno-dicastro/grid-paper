@@ -1,0 +1,54 @@
+{
+  "app_title": "Gerador de Folhas",
+  "sidebar": {
+    "pattern": "Padronagem",
+    "patterns": {
+      "ruled": "Pautado",
+      "grid": "Quadriculado",
+      "dots": "Pontilhado",
+      "staff": "Partitura",
+      "calligraphy": "Caligrafia",
+      "triangular": "Triangular"
+    },
+    "page": "Página",
+    "size": "Tamanho",
+    "orientation": {
+      "label": "Orientação",
+      "portrait": "Retrato",
+      "landscape": "Paisagem"
+    },
+    "parameters": "Parâmetros",
+    "spacing": "Espaçamento",
+    "line_width": "Espessura",
+    "margin": "Margem",
+    "line_color": "Cor da Linha",
+    "numbering": "Numeração",
+    "show_line_numbers": "Numerar linhas",
+    "total_lines": "Total de linhas",
+    "start_number": "Início",
+    "extra_content": "Conteúdo Extra",
+    "header_main": "Cabeçalho (Principal)",
+    "header_secondary": "Cabeçalho (Secundário)",
+    "footer": "Rodapé",
+    "watermark": "Marca d'água",
+    "placeholders": {
+      "header_main": "Ex: Nome, Instituição...",
+      "header_secondary": "Ex: Data, Matéria...",
+      "footer": "Ex: Página...",
+      "watermark": "Ex: CONFIDENCIAL"
+    },
+    "language": "Idioma"
+  },
+  "zoom": {
+    "label": "Zoom",
+    "auto_fit": "Auto-Ajustar",
+    "title": "Ajustar Zoom"
+  },
+  "export": {
+    "svg": "Exportar como SVG",
+    "pdf": "Exportar como PDF",
+    "pdf_exporting": "Exportando...",
+    "print": "Imprimir Folhas",
+    "print_btn": "Imprimir"
+  }
+}

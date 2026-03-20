@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { DEFAULT_SETTINGS } from './types/paper';
 import type { PaperSettings } from './types/paper';
 import { Sidebar } from './components/Sidebar';
 import { PatternSVG } from './components/PatternSVG';
-import { Printer, FileCode, FileText, Menu, Grid, ZoomIn } from 'lucide-react';
+import { Printer, FileCode, FileText, Menu, Grid, ZoomIn, Languages } from 'lucide-react';
 import jsPDF from 'jspdf';
 
 function App() {
+  const { t, i18n } = useTranslation();
   const [settings, setSettings] = useState<PaperSettings>(DEFAULT_SETTINGS);
   const [isExporting, setIsExporting] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -180,7 +182,7 @@ function App() {
       <header className="lg:hidden flex items-center justify-between p-4 bg-[#fdfcf9] border-b border-[#e8e2d7] text-[#8b5e3c] no-print sticky top-0 z-30 shadow-sm">
         <div className="flex items-center gap-2">
           <Grid size={24} color="#8b5e3c" />
-          <h1 className="text-lg font-bold tracking-tight text-stone-800">Gerador de Folhas</h1>
+          <h1 className="text-lg font-bold tracking-tight text-stone-800">{t('app_title')}</h1>
         </div>
         <button 
           onClick={() => setIsSidebarOpen(true)}
@@ -199,6 +201,33 @@ function App() {
       
       <main ref={mainRef} className="flex-1 p-4 sm:p-8 print:p-0 overflow-auto print:overflow-visible print:h-auto flex flex-col items-center gap-8 print:gap-0 bg-[#f0ece2] print:bg-white relative">
         
+        {/* Floating Language Switcher - Top Right */}
+        <div className="fixed top-4 right-4 lg:top-8 lg:right-8 flex gap-2 no-print z-40 bg-white/80 backdrop-blur-md p-1.5 rounded-full shadow-lg border border-[#e8e2d7]">
+          <div className="flex items-center px-2 mr-1 text-[#8b5e3c]">
+            <Languages size={18} />
+          </div>
+          <button
+            onClick={() => i18n.changeLanguage('pt')}
+            className={`px-3 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
+              i18n.language.startsWith('pt')
+                ? 'bg-[#8b5e3c] text-white shadow-md'
+                : 'text-stone-500 hover:bg-stone-100'
+            }`}
+          >
+            PT
+          </button>
+          <button
+            onClick={() => i18n.changeLanguage('en')}
+            className={`px-3 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
+              i18n.language.startsWith('en')
+                ? 'bg-[#8b5e3c] text-white shadow-md'
+                : 'text-stone-500 hover:bg-stone-100'
+            }`}
+          >
+            EN
+          </button>
+        </div>
+        
         {/* Floating Zoom Control - Bottom Left */}
         <div className="fixed bottom-4 left-4 sm:bottom-8 sm:left-8 lg:left-[calc(20rem+2rem)] flex flex-col items-start gap-3 no-print z-40">
           <div className={`
@@ -206,7 +235,7 @@ function App() {
             ${isZoomOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4 pointer-events-none'}
           `}>
             <div className="flex justify-between text-xs font-bold text-[#8b5e3c] mb-1">
-              <span>Zoom</span>
+              <span>{t('zoom.label')}</span>
               <span>{Math.round(settings.zoom * 100)}%</span>
             </div>
             <input
@@ -224,14 +253,14 @@ function App() {
               }}
               className="mt-1 text-[10px] font-bold text-stone-500 hover:text-[#8b5e3c] uppercase tracking-wider text-left transition-colors"
             >
-              Auto-Ajustar
+              {t('zoom.auto_fit')}
             </button>
           </div>
           
           <button
             onClick={() => setIsZoomOpen(!isZoomOpen)}
             className="flex items-center justify-center w-12 h-12 bg-white text-[#8b5e3c] rounded-full hover:bg-stone-50 active:scale-[0.98] transition-all shadow-xl border border-[#e8e2d7] cursor-pointer"
-            title="Ajustar Zoom"
+            title={t('zoom.title')}
           >
             <ZoomIn size={24} />
           </button>
@@ -262,7 +291,7 @@ function App() {
         <button
           onClick={handleExportSVG}
           className="flex items-center justify-center gap-2 px-4 py-3 bg-white text-[#8b5e3c] rounded-full hover:bg-stone-50 active:scale-[0.98] transition-all font-semibold shadow-xl border border-[#e8e2d7] cursor-pointer group"
-          title="Exportar como SVG"
+          title={t('export.svg')}
         >
           <FileCode size={20} className="group-hover:scale-110 transition-transform" />
           <span className="hidden sm:inline text-sm">SVG</span>
@@ -272,23 +301,23 @@ function App() {
           onClick={handleExportPDF}
           disabled={isExporting}
           className={`flex items-center justify-center gap-2 px-4 py-3 bg-white text-[#8b5e3c] rounded-full hover:bg-stone-50 active:scale-[0.98] transition-all font-semibold shadow-xl border border-[#e8e2d7] cursor-pointer group ${isExporting ? 'opacity-50 cursor-not-allowed' : ''}`}
-          title="Exportar como PDF"
+          title={t('export.pdf')}
         >
           {isExporting ? (
             <div className="w-5 h-5 border-2 border-[#8b5e3c] border-t-transparent rounded-full animate-spin" />
           ) : (
             <FileText size={20} className="group-hover:scale-110 transition-transform" />
           )}
-          <span className="hidden sm:inline text-sm">{isExporting ? 'Exportando...' : 'PDF'}</span>
+          <span className="hidden sm:inline text-sm">{isExporting ? t('export.pdf_exporting') : 'PDF'}</span>
         </button>
 
         <button
           onClick={() => window.print()}
           className="flex items-center justify-center gap-3 px-6 py-4 bg-[#8b5e3c] text-white rounded-full hover:bg-[#744d32] active:scale-[0.98] transition-all font-bold shadow-2xl group border-none cursor-pointer"
-          title="Imprimir Folhas"
+          title={t('export.print')}
         >
           <Printer size={24} className="group-hover:scale-110 transition-transform" />
-          <span className="hidden sm:inline">Imprimir</span>
+          <span className="hidden sm:inline">{t('export.print_btn')}</span>
         </button>
       </div>
     </div>
