@@ -6,6 +6,8 @@
 
 ## English
 
+**🌐 Live Demo:** [gridpaper.dicastro.io](https://gridpaper.dicastro.io/)
+
 ### 📝 Description
 **Grid Paper Generator** is a high-precision web tool designed to create and print custom paper patterns. Whether you need standard ruled paper for writing, grids for technical drawing, or specialized sheets for calligraphy and music, this tool provides a seamless experience with pixel-perfect (or rather, millimeter-perfect) accuracy.
 
@@ -33,6 +35,8 @@ Built with **React 19** and **Vite 8**, the application leverages native **SVG r
 ---
 
 ## Português
+
+**🌐 Acesse o site:** [gridpaper.dicastro.io](https://gridpaper.dicastro.io/)
 
 ### 📝 Descrição
 O **Gerador de Folhas (Grid Paper Generator)** é uma ferramenta web de alta precisão projetada para criar e imprimir papel com padronagem personalizada. Seja para folhas pautadas simples, grades para desenho técnico ou folhas especializadas para caligrafia e música, esta ferramenta oferece uma experiência fluida com precisão milimétrica.
