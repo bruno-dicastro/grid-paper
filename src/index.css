@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+  background-color: #f0ece2;
+}
+
+@media print {
+  @page {
+    margin: 0;
+  }
+  
+  .portrait {
+    @page {
+      size: portrait;
+    }
+  }
+
+  .landscape {
+    @page {
+      size: landscape;
+    }
+  }
+  
+  html, body {
+    background-color: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    height: auto !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Ensure the main container doesn't have padding/background during print */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: none !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  .preview-container {
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  .page-container {
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    page-break-after: always;
+    break-after: page;
+  }
+}
+
+.page-container {
+  background-color: white;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  transition: transform 0.2s;
+}
+
+.page-container:hover {
+  transform: scale(1.01);
+}
+
+/* Global Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b8b0a1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a39988;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #b8b0a1 transparent;
+}
