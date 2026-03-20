@@ -1,0 +1,55 @@
+{
+  "app_title": "Générateur de Papier",
+  "sidebar": {
+    "pattern": "Motif",
+    "patterns": {
+      "ruled": "Ligné",
+      "grid": "Quadrillé",
+      "dots": "Pointillés",
+      "staff": "Portée",
+      "calligraphy": "Calligraphie",
+      "triangular": "Triangulaire"
+    },
+    "page": "Page",
+    "size": "Taille",
+    "orientation": {
+      "label": "Orientation",
+      "portrait": "Portrait",
+      "landscape": "Paysage"
+    },
+    "parameters": "Paramètres",
+    "spacing": "Espacement",
+    "line_width": "Épaisseur",
+    "margin": "Marge",
+    "line_color": "Couleur des lignes",
+    "numbering": "Numérotation",
+    "show_line_numbers": "Numéroter les lignes",
+    "total_lines": "Nombre de lignes",
+    "start_number": "Commencer à",
+    "extra_content": "Contenu Extra",
+    "header_main": "En-tête (Principal)",
+    "header_secondary": "En-tête (Secondaire)",
+    "footer": "Pied de page",
+    "footer_default": "Créé avec gridpaper.dicastro.io",
+    "watermark": "Filigrane",
+    "placeholders": {
+      "header_main": "Ex: Nom, Institution...",
+      "header_secondary": "Ex: Date, Sujet...",
+      "footer": "Ex: Page...",
+      "watermark": "Ex: CONFIDENTIEL"
+    },
+    "language": "Langue"
+  },
+  "zoom": {
+    "label": "Zoom",
+    "auto_fit": "Auto-Ajustement",
+    "title": "Ajuster le Zoom"
+  },
+  "export": {
+    "svg": "Exporter en SVG",
+    "pdf": "Exporter en PDF",
+    "pdf_exporting": "Exportation...",
+    "print": "Imprimer les pages",
+    "print_btn": "Imprimer"
+  }
+}
