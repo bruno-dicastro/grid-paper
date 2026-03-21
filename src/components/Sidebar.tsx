@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import type { PaperSettings, PatternType } from '../types/paper';
 import { PATTERN_DEFAULTS } from '../types/paper';
-import { Settings, Type, Layout, Grid, Hash, Maximize } from 'lucide-react';
+import { Settings, Type, Layout, Grid, Hash, Maximize, RotateCcw } from 'lucide-react';
 
 interface SidebarProps {
   settings: PaperSettings;
@@ -18,6 +18,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
 
   const handleChange = (key: keyof PaperSettings, value: any) => {
     setSettings((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleReset = () => {
+    const defaults = PATTERN_DEFAULTS[settings.pattern];
+    setSettings((prev) => ({
+      ...prev,
+      ...defaults
+    }));
   };
 
   const patterns: { label: string; value: PatternType }[] = [
@@ -117,9 +125,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
 
         {/* Dimensions */}
         <section className="space-y-4">
-          <label className="flex items-center gap-2 text-sm font-semibold text-stone-700">
-            <Settings size={16} color={ICON_COLOR} /> {t('sidebar.parameters')}
-          </label>
+          <div className="flex items-center justify-between">
+            <label className="flex items-center gap-2 text-sm font-semibold text-stone-700">
+              <Settings size={16} color={ICON_COLOR} /> {t('sidebar.parameters')}
+            </label>
+            <button
+              onClick={handleReset}
+              className="flex items-center gap-1 px-2 py-1 text-[10px] font-bold text-[#8b5e3c] hover:bg-[#f5f1e9] rounded-md transition-colors uppercase tracking-wider"
+              title={t('sidebar.reset_defaults')}
+            >
+              <RotateCcw size={12} />
+              {t('sidebar.reset_defaults')}
+            </button>
+          </div>
 
           <div className="space-y-2">
             <div className="flex justify-between text-xs text-stone-500">

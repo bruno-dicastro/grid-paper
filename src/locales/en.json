@@ -18,6 +18,7 @@
       "landscape": "Landscape"
     },
     "parameters": "Parameters",
+    "reset_defaults": "Reset to Defaults",
     "spacing": "Spacing",
     "line_width": "Line Width",
     "margin": "Margin",
