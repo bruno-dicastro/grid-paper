@@ -13,6 +13,7 @@ function App() {
   const [isExporting, setIsExporting] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isZoomOpen, setIsZoomOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
 
@@ -184,12 +185,44 @@ function App() {
           <Grid size={24} color="#8b5e3c" />
           <h1 className="text-lg font-bold tracking-tight text-stone-800">{t('app_title')}</h1>
         </div>
-        <button 
-          onClick={() => setIsSidebarOpen(true)}
-          className="p-2 hover:bg-[#f5f1e9] rounded-md transition-colors"
-        >
-          <Menu size={24} />
-        </button>
+        <div className="flex items-center gap-1 relative">
+          <button 
+            onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+            className={`p-2 rounded-md transition-colors ${isLanguageMenuOpen ? 'bg-[#f5f1e9]' : 'hover:bg-[#f5f1e9]'}`}
+          >
+            <Languages size={24} />
+          </button>
+          
+          {isLanguageMenuOpen && (
+            <div className="absolute top-full right-0 mt-2 w-32 bg-white rounded-lg shadow-xl border border-[#e8e2d7] py-2 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+              <button
+                onClick={() => { i18n.changeLanguage('pt'); setIsLanguageMenuOpen(false); }}
+                className={`w-full px-4 py-2 text-left text-sm font-bold ${i18n.language.startsWith('pt') ? 'bg-[#8b5e3c] text-white' : 'text-stone-600 hover:bg-[#f5f1e9]'}`}
+              >
+                Português (PT)
+              </button>
+              <button
+                onClick={() => { i18n.changeLanguage('en'); setIsLanguageMenuOpen(false); }}
+                className={`w-full px-4 py-2 text-left text-sm font-bold ${i18n.language.startsWith('en') ? 'bg-[#8b5e3c] text-white' : 'text-stone-600 hover:bg-[#f5f1e9]'}`}
+              >
+                English (EN)
+              </button>
+              <button
+                onClick={() => { i18n.changeLanguage('fr'); setIsLanguageMenuOpen(false); }}
+                className={`w-full px-4 py-2 text-left text-sm font-bold ${i18n.language.startsWith('fr') ? 'bg-[#8b5e3c] text-white' : 'text-stone-600 hover:bg-[#f5f1e9]'}`}
+              >
+                Français (FR)
+              </button>
+            </div>
+          )}
+
+          <button 
+            onClick={() => setIsSidebarOpen(true)}
+            className="p-2 hover:bg-[#f5f1e9] rounded-md transition-colors"
+          >
+            <Menu size={24} />
+          </button>
+        </div>
       </header>
 
       <Sidebar 
@@ -202,7 +235,7 @@ function App() {
       <main ref={mainRef} className="flex-1 p-4 sm:p-8 print:p-0 overflow-auto print:overflow-visible print:h-auto flex flex-col items-center gap-8 print:gap-0 bg-[#f0ece2] print:bg-white relative">
         
         {/* Floating Language Switcher - Top Right */}
-        <div className="fixed top-4 right-4 lg:top-8 lg:right-8 flex gap-2 no-print z-40 bg-white/80 backdrop-blur-md p-1.5 rounded-full shadow-lg border border-[#e8e2d7]">
+        <div className="hidden lg:flex fixed top-8 right-8 gap-2 no-print z-40 bg-white/80 backdrop-blur-md p-1.5 rounded-full shadow-lg border border-[#e8e2d7]">
           <div className="flex items-center px-2 mr-1 text-[#8b5e3c]">
             <Languages size={18} />
           </div>
