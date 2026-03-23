@@ -4,7 +4,7 @@ import { DEFAULT_SETTINGS } from './types/paper';
 import type { PaperSettings } from './types/paper';
 import { Sidebar } from './components/Sidebar';
 import { PatternSVG } from './components/PatternSVG';
-import { Printer, FileCode, FileText, Menu, Grid, ZoomIn, Languages } from 'lucide-react';
+import { Printer, FileCode, FileText, Menu, Grid, ZoomIn, Languages, Share2, Check } from 'lucide-react';
 import jsPDF from 'jspdf';
 
 function App() {
@@ -14,8 +14,66 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isZoomOpen, setIsZoomOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const skipAutoZoomRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
+
+  // Load settings from URL on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const hasParams = Array.from(params.keys()).some(key => key in DEFAULT_SETTINGS);
+    
+    if (hasParams) {
+      const newSettings = { ...DEFAULT_SETTINGS };
+      
+      if (params.has('zoom')) {
+        skipAutoZoomRef.current = true;
+      }
+
+      params.forEach((value, key) => {
+        if (key in DEFAULT_SETTINGS) {
+          const defaultVal = DEFAULT_SETTINGS[key as keyof PaperSettings];
+          if (typeof defaultVal === 'number') {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (newSettings as any)[key] = parseFloat(value);
+          } else if (typeof defaultVal === 'boolean') {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (newSettings as any)[key] = value === 'true';
+          } else {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (newSettings as any)[key] = value;
+          }
+        }
+      });
+      
+      setSettings(newSettings);
+    }
+  }, []);
+
+  const handleShare = () => {
+    const params = new URLSearchParams();
+    
+    Object.entries(settings).forEach(([key, value]) => {
+      // 1. Ignore zoom and watermarkOpacity
+      if (key === 'zoom' || key === 'watermarkOpacity') return;
+
+      // 2. Ignore values that match the default settings
+      const defaultValue = DEFAULT_SETTINGS[key as keyof PaperSettings];
+      if (value === defaultValue) return;
+
+      // 3. Only include if not empty/null
+      if (value !== undefined && value !== null && value !== '') {
+        params.set(key, value.toString());
+      }
+    });
+
+    const url = `${window.location.origin}${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    });
+  };
 
   // Constants for dimensions in mm
   const DIMENSIONS = {
@@ -36,6 +94,11 @@ function App() {
   // Auto-fit zoom on mount and layout changes
   useEffect(() => {
     const calculateFitZoom = () => {
+      if (skipAutoZoomRef.current) {
+        skipAutoZoomRef.current = false;
+        return;
+      }
+      
       if (!mainRef.current) return;
       
       const padding = 64; // Approximate padding around the page
@@ -300,13 +363,25 @@ function App() {
             </button>
           </div>
           
-          <button
-            onClick={() => setIsZoomOpen(!isZoomOpen)}
-            className="flex items-center justify-center w-12 h-12 bg-white text-[#8b5e3c] rounded-full hover:bg-stone-50 active:scale-[0.98] transition-all shadow-xl border border-[#e8e2d7] cursor-pointer"
-            title={t('zoom.title')}
-          >
-            <ZoomIn size={24} />
-          </button>
+          <div className="flex flex-col items-center gap-2">
+            <button
+              onClick={handleShare}
+              className={`flex items-center justify-center w-12 h-12 rounded-full active:scale-[0.98] transition-all shadow-xl border border-[#e8e2d7] cursor-pointer ${
+                isCopied ? 'bg-green-600 text-white border-green-700' : 'bg-white text-[#8b5e3c] hover:bg-stone-50'
+              }`}
+              title={t('share.title')}
+            >
+              {isCopied ? <Check size={24} /> : <Share2 size={24} />}
+            </button>
+            
+            <button
+              onClick={() => setIsZoomOpen(!isZoomOpen)}
+              className="flex items-center justify-center w-12 h-12 bg-white text-[#8b5e3c] rounded-full hover:bg-stone-50 active:scale-[0.98] transition-all shadow-xl border border-[#e8e2d7] cursor-pointer"
+              title={t('zoom.title')}
+            >
+              <ZoomIn size={24} />
+            </button>
+          </div>
         </div>
 
         <div 

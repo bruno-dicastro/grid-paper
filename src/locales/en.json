@@ -52,5 +52,10 @@
     "pdf_exporting": "Exporting...",
     "print": "Print Pages",
     "print_btn": "Print"
+  },
+  "share": {
+    "title": "Share Settings",
+    "copied": "URL Copied!",
+    "button": "Share"
   }
 }

@@ -51,6 +51,11 @@
     "pdf": "Exporter en PDF",
     "pdf_exporting": "Exportation...",
     "print": "Imprimer les pages",
-    "print_btn": "Imprimer"
+    "print_btn": "Imprimir"
+  },
+  "share": {
+    "title": "Partager les paramètres",
+    "copied": "URL copiée!",
+    "button": "Partager"
   }
-}
+  }

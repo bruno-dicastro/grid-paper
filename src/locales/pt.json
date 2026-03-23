@@ -52,5 +52,10 @@
     "pdf_exporting": "Exportando...",
     "print": "Imprimir Folhas",
     "print_btn": "Imprimir"
+  },
+  "share": {
+    "title": "Compartilhar Configurações",
+    "copied": "URL Copiada!",
+    "button": "Compartilhar"
   }
 }
