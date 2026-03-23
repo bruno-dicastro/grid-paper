@@ -9,18 +9,6 @@
     margin: 0;
   }
   
-  .portrait {
-    @page {
-      size: portrait;
-    }
-  }
-
-  .landscape {
-    @page {
-      size: landscape;
-    }
-  }
-  
   html, body {
     background-color: white !important;
     margin: 0 !important;

@@ -137,6 +137,16 @@ function App() {
 
   const pageCount = calculatePages();
 
+  // Dynamic CSS for print dialog to match user settings
+  const printStyle = `
+    @media print {
+      @page { 
+        size: ${settings.pageSize.toLowerCase()} ${settings.orientation};
+        margin: 0;
+      }
+    }
+  `;
+
   const handleExportSVG = () => {
     if (!containerRef.current) return;
     const svgs = containerRef.current.querySelectorAll('svg');
@@ -241,6 +251,7 @@ function App() {
 
   return (
     <div className={`flex flex-col lg:flex-row h-screen print:h-auto print:block bg-[#f0ece2] print:bg-white ${settings.orientation === 'landscape' ? 'landscape' : 'portrait'}`}>
+      <style>{printStyle}</style>
       
       {/* Mobile Header */}
       <header className="lg:hidden flex items-center justify-between p-4 bg-[#fdfcf9] border-b border-[#e8e2d7] text-[#8b5e3c] no-print sticky top-0 z-30 shadow-sm">
