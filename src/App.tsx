@@ -125,14 +125,14 @@ function App() {
 
   // Calculate pages needed
   const calculatePages = () => {
-    if (settings.pattern !== 'ruled' || !settings.showLineNumbers) {
-      return 1;
+    if (settings.pattern === 'ruled' && settings.showLineNumbers) {
+      const contentHeight = PAGE_HEIGHT - (settings.margin * 2);
+      const linesPerPage = Math.floor(contentHeight / settings.spacing);
+      if (linesPerPage <= 0) return 1;
+      return Math.ceil(settings.totalLines / linesPerPage) || 1;
     }
     
-    const contentHeight = PAGE_HEIGHT - (settings.margin * 2);
-    const linesPerPage = Math.floor(contentHeight / settings.spacing);
-    if (linesPerPage <= 0) return 1;
-    return Math.ceil(settings.totalLines / linesPerPage) || 1;
+    return settings.pageCount || 1;
   };
 
   const pageCount = calculatePages();

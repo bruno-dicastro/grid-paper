@@ -166,18 +166,34 @@ export const PatternSVG: React.FC<PatternSVGProps> = ({ settings, width, height,
           )}
         </g>
       )}
-      <text 
-        x={width / 2} 
-        y={height - margin / 2} 
-        fontSize={Math.max(3, margin / 4)} 
-        fill={lineColor} 
-        textAnchor="middle" 
-        dominantBaseline="middle" 
-        className="select-none"
-        fillOpacity={1}
-      >
-        {settings.footer /* || t('sidebar.footer_default') */}
-      </text>
+      {/* Footer and Page Number */}
+      <g className="select-none">
+        {settings.footer && (
+          <text 
+            x={width / 2} 
+            y={settings.showPageNumber ? height - (margin / 2) - (Math.max(3, margin / 4) * 0.6) : height - margin / 2} 
+            fontSize={Math.max(3, margin / 4)} 
+            fill={lineColor} 
+            textAnchor="middle" 
+            dominantBaseline="middle"
+          >
+            {settings.footer}
+          </text>
+        )}
+        {settings.showPageNumber && (
+          <text 
+            x={width / 2} 
+            y={settings.footer ? height - (margin / 2) + (Math.max(3, margin / 4) * 0.6) : height - margin / 2} 
+            fontSize={Math.max(3, margin / 4) * 0.8} 
+            fill={lineColor} 
+            textAnchor="middle" 
+            dominantBaseline="middle"
+            fillOpacity={settings.footer ? 0.7 : 1}
+          >
+            {pageIndex + 1}
+          </text>
+        )}
+      </g>
     </svg>
   );
 };

@@ -17,6 +17,8 @@
       "portrait": "Portrait",
       "landscape": "Paysage"
     },
+    "page_count": "Nombre de pages",
+    "show_page_number": "Afficher les numéros de page",
     "parameters": "Paramètres",
     "reset_defaults": "Restaurer par défaut",
     "spacing": "Espacement",

@@ -21,6 +21,8 @@ export interface PaperSettings {
   orientation: 'portrait' | 'landscape';
   margin: number; // in mm
   zoom: number; // multiplier
+  pageCount: number;
+  showPageNumber: boolean;
 }
 
 export const PATTERN_DEFAULTS: Record<PatternType, Partial<PaperSettings>> = {
@@ -30,6 +32,7 @@ export const PATTERN_DEFAULTS: Record<PatternType, Partial<PaperSettings>> = {
     lineWidth: 0.2,
     margin: 20,
     orientation: 'portrait',
+    pageCount: 1,
   },
   grid: {
     spacing: 3,
@@ -37,6 +40,7 @@ export const PATTERN_DEFAULTS: Record<PatternType, Partial<PaperSettings>> = {
     lineWidth: 0.2,
     margin: 0,
     orientation: 'portrait',
+    pageCount: 1,
   },
   dots: {
     spacing: 3,
@@ -44,6 +48,7 @@ export const PATTERN_DEFAULTS: Record<PatternType, Partial<PaperSettings>> = {
     lineWidth: 0.2,
     margin: 0,
     orientation: 'portrait',
+    pageCount: 1,
   },
   staff: {
     spacing: 8.5,
@@ -51,6 +56,7 @@ export const PATTERN_DEFAULTS: Record<PatternType, Partial<PaperSettings>> = {
     lineWidth: 0.2,
     margin: 20,
     orientation: 'portrait',
+    pageCount: 1,
   },
   calligraphy: {
     spacing: 5,
@@ -58,6 +64,7 @@ export const PATTERN_DEFAULTS: Record<PatternType, Partial<PaperSettings>> = {
     lineWidth: 0.2,
     margin: 12,
     orientation: 'landscape',
+    pageCount: 1,
   },
   triangular: {
     spacing: 3,
@@ -65,6 +72,7 @@ export const PATTERN_DEFAULTS: Record<PatternType, Partial<PaperSettings>> = {
     lineWidth: 0.2,
     margin: 0,
     orientation: 'portrait',
+    pageCount: 1,
   },
 };
 
@@ -82,4 +90,6 @@ export const DEFAULT_SETTINGS: PaperSettings = {
   pageSize: 'A4',
   orientation: 'portrait',
   zoom: 1,
+  pageCount: 1,
+  showPageNumber: false,
 } as PaperSettings;

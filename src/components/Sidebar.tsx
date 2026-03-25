@@ -121,6 +121,32 @@ export const Sidebar: React.FC<SidebarProps> = ({ settings, setSettings, isOpen,
               </select>
             </div>
           </div>
+
+          <div className="space-y-3 pt-1">
+            {!(settings.pattern === 'ruled' && settings.showLineNumbers) && (
+              <div className="space-y-1">
+                <label className="text-xs text-stone-500">{t('sidebar.page_count')}</label>
+                <input
+                  type="number"
+                  min="1"
+                  max="100"
+                  value={settings.pageCount}
+                  onChange={(e) => handleChange('pageCount', Math.max(1, parseInt(e.target.value) || 1))}
+                  className="w-full p-2 text-xs border border-[#e8e2d7] rounded-md focus:ring-2 focus:ring-[#8b5e3c] outline-none bg-white text-stone-700"
+                />
+              </div>
+            )}
+            
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={settings.showPageNumber}
+                onChange={(e) => handleChange('showPageNumber', e.target.checked)}
+                className="w-4 h-4 text-[#8b5e3c] rounded border-[#e8e2d7] focus:ring-[#8b5e3c] accent-[#8b5e3c]"
+              />
+              <span className="text-xs text-stone-600">{t('sidebar.show_page_number')}</span>
+            </label>
+          </div>
         </section>
 
         {/* Dimensions */}
