@@ -1,0 +1,17 @@
+{
+  "name": "Gerador de Folhas",
+  "short_name": "GridPaper",
+  "description": "Gerador online gratuito de folhas personalizadas: pautado, quadriculado, pontilhado, partituras e caligrafia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0ece2",
+  "theme_color": "#8b5e3c",
+  "icons": [
+    {
+      "src": "/icons.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
